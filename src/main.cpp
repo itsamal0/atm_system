@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include "../include/atm_system/menu_utils.h"
+#include "../include/atm_system/identity.h"
 using namespace std;
 
 enum enMainMenuOptions {
@@ -57,7 +58,10 @@ void showMainMenu() {
 }
 
 void atmSystem() {
-    showMainMenu();
+    bool loginSuccessful = identity::login();
+
+    if (loginSuccessful)
+        showMainMenu();
 }
 
 int main() {
