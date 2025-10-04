@@ -2,6 +2,7 @@
 #include <vector>
 #include "../include/atm_system/menu_utils.h"
 #include "../include/atm_system/identity.h"
+#include "../include/atm_system/atm_menu.h"
 using namespace std;
 
 enum enMainMenuOptions {
@@ -25,15 +26,16 @@ void showMainMenu() {
 
     do {
         system("cls");
+        string mainMenuMsg = "\nChoose what do you want to do from [1] to [5]: ";
 
         menu_utils::showMenu("ATM Main Menu Screen", mainMenuOptions);
-        choice = menu_utils::readMenuChoice(1, mainMenuOptions.size());
+        choice = menu_utils::readMenuChoice(mainMenuMsg, 1, mainMenuOptions.size());
 
         system("cls");
 
         switch (choice) {
             case QUICK_WITHDRAW:
-                cout << "You chose Quick Withdraw.\n";
+                atm_menu::quickWithdraw();
                 break;
             case NORMAL_WITHDRAW:
                 cout << "You chose Normal Withdraw.\n";
@@ -47,11 +49,6 @@ void showMainMenu() {
             case LOGOUT:
                 cout << "Logging out...\n";
                 break;
-        }
-
-        if (choice != LOGOUT) {
-            cout << "\nPress any key to go back to main menu...";
-            system("pause >nul");
         }
 
     } while (choice != LOGOUT);

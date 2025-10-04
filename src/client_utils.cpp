@@ -39,6 +39,18 @@ namespace client_utils {
         return newClient;
     }
 
+    // Convert a client struct to a single line string with separator
+    string convertRecordToLine(stClient client, string separator) {
+        string stClientRecord = "";
+        stClientRecord += client.accountNumber + separator;
+        stClientRecord += client.pinCode + separator;
+        stClientRecord += client.name + separator;
+        stClientRecord += client.phone + separator;
+        stClientRecord += to_string(client.accountBalance);
+        return stClientRecord;
+    }
+
+
     // Load clients data from file into a vector
     vector<stClient> loadClientsDataFromFile(string fileName) {
         vector<stClient> vClients;
@@ -65,6 +77,36 @@ namespace client_utils {
             }
         }
         return false;
+    }
+
+    // Save all clients back to file
+    vector<stClient> saveClientsDataToFile(const string& fileName, const vector<stClient>& vClients) {
+        fstream myFile(fileName, ios::out);
+
+        if (myFile.is_open()) {
+            for (const stClient& c : vClients) {
+                if (!c.markForDelete) {
+                    myFile << convertRecordToLine(c) << endl;
+                }
+            }
+            myFile.close();
+        }
+
+        return vClients;
+    }
+
+    void updateClient(string accountNumber, double newBalance) {
+        vector<stClient> vClients = loadClientsDataFromFile(clientsFileName);
+
+        // Update the client in the vector
+        for (stClient& c : vClients) {
+            if (c.accountNumber == accountNumber) {
+                c.accountBalance = newBalance;
+                break;
+            }
+        }
+        // Save updated clients to file
+        saveClientsDataToFile(clientsFileName, vClients);
     }
 
 }

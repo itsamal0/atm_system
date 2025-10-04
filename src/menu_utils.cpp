@@ -26,12 +26,17 @@ namespace menu_utils {
         return choice;
     }
 
-    int readMenuChoice(int minValue, int maxValue) {  
+    int readMenuChoice(string msg, int minValue, int maxValue) {  
         int choice;  
-        cout << "Choose what do you want to do? [" << minValue << " to " << maxValue << "]: ";
+        cout << msg;
         cin >> choice;  
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
         return readValidChoice(choice, minValue, maxValue);
+    }
+
+    void pauseAndReturnToMenu() {
+        cout << "\nPress any key to go back to main menu...";
+        system("pause>nul");
     }
 }
