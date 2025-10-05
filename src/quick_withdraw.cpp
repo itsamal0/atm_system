@@ -35,7 +35,6 @@ namespace atm_menu {
     void quickWithdraw() {
         int choice = 0;
         int amount = 0;
-        char answer = 'N';
 
         client_utils::printHeader("Quick Withdraw Screen");
 
@@ -55,21 +54,7 @@ namespace atm_menu {
 
         amount = getWithdrawAmount((enQuickWithdrawOptions)choice);
 
-        if (amount <= currentClient.accountBalance) {
-            cout << "\nAre you sure you want to withdraw " << amount << "? [y/n]: ";
-            cin >> answer;
-
-            if (toupper(answer) == 'Y') {
-                currentClient.accountBalance -= amount;
-
-                client_utils::updateClient(currentClient.accountNumber, currentClient.accountBalance);
-
-                cout << "\nDone successfully " << amount << ", New balance : " << currentClient.accountBalance << "\n";
-            }
-
-        } else {
-            cout << "\nInsufficient balance!\n";
-        }
+        client_utils::withdrawAmount(amount);
 
         menu_utils::pauseAndReturnToMenu();
     }

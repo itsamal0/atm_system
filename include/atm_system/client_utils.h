@@ -13,4 +13,5 @@ namespace client_utils {
     bool findClientByAccountNumber(const std::string& accountNumber, const std::vector<identity::stClient>& vClients, identity::stClient& client);
     std::vector<identity::stClient> saveClientsDataToFile(const std::string& fileName, const std::vector<identity::stClient>& vClients);
     void updateClient(std::string accountNumber, double newBalance);
+    void withdrawAmount(int amount);
 }
