@@ -44,7 +44,7 @@ void showMainMenu() {
                 atm_menu::deposit();
                 break;
             case CHECK_BALANCE:
-                cout << "You chose Check Balance.\n";
+                atm_menu::checkBalance();
                 break;
             case LOGOUT:
                 cout << "Logging out...\n";
