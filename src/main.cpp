@@ -38,7 +38,7 @@ void showMainMenu() {
                 atm_menu::quickWithdraw();
                 break;
             case NORMAL_WITHDRAW:
-                cout << "You chose Normal Withdraw.\n";
+                atm_menu::normalWithdraw();
                 break;
             case DEPOSIT:
                 cout << "You chose Deposit.\n";
