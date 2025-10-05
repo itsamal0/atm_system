@@ -47,22 +47,22 @@ void showMainMenu() {
                 atm_menu::checkBalance();
                 break;
             case LOGOUT:
-                cout << "Logging out...\n";
-                break;
+                return;
         }
 
-    } while (choice != LOGOUT);
+    } while (true);
 }
 
 void atmSystem() {
-    bool loginSuccessful = identity::login();
-
-    if (loginSuccessful)
-        showMainMenu();
+    while (true) {
+        system("cls");
+        if (identity::login()) {
+            showMainMenu();
+        }
+    }
 }
 
 int main() {
-    system("cls");
     atmSystem();
     return 0;
 }
