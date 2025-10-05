@@ -1,5 +1,6 @@
 #include "../include/atm_system/client_utils.h"
 #include "../include/atm_system/menu_utils.h"
+#include "../include/atm_system/identity.h"
 #include <iostream>
 using namespace std;
 
@@ -9,6 +10,8 @@ namespace atm_menu {
         int amount = 0;
 
         client_utils::printHeader("Normal Withdraw Screen");
+
+        cout << "\nYour Balance is " << identity::currentClient.accountBalance << endl;
 
         do {
             cout << "\nEnter an amount (multiple of 5's): ";
