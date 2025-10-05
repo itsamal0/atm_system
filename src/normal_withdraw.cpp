@@ -15,7 +15,7 @@ namespace atm_menu {
             cin >> amount;
         } while (amount <= 0 || amount % 5 != 0);
 
-        client_utils::withdrawAmount(amount);
+        client_utils::applyTransaction(amount, "withdraw");
 
         menu_utils::pauseAndReturnToMenu();
     }

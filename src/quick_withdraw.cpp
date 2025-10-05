@@ -54,7 +54,7 @@ namespace atm_menu {
 
         amount = getWithdrawAmount((enQuickWithdrawOptions)choice);
 
-        client_utils::withdrawAmount(amount);
+        client_utils::applyTransaction(amount, "withdraw");
 
         menu_utils::pauseAndReturnToMenu();
     }

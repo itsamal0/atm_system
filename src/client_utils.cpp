@@ -109,23 +109,26 @@ namespace client_utils {
         saveClientsDataToFile(clientsFileName, vClients);
     }
 
-    void withdrawAmount(int amount) {
+    void applyTransaction(int amount, string operation) {
         char answer = 'N';
 
-        if (amount <= currentClient.accountBalance) {
-            cout << "\nAre you sure you want to withdraw " << amount << "? [y/n]: ";
-            cin >> answer;
-
-            if (toupper(answer) == 'Y') {
-                currentClient.accountBalance -= amount;
-
-                client_utils::updateClient(currentClient.accountNumber, currentClient.accountBalance);
-
-                cout << "\nDone successfully, New balance is : " << currentClient.accountBalance << "\n";
-            }
-
-        } else {
+        if (operation == "withdraw" && amount > currentClient.accountBalance) {
             cout << "\nInsufficient balance!\n";
+            return;
+        }
+
+        cout << "\nAre you sure you want to " << operation << " " << amount << "? [y/n]: ";
+        cin >> answer;
+
+        if (toupper(answer) == 'Y') {
+            if (operation == "withdraw")
+                currentClient.accountBalance -= amount;
+            else if (operation == "deposit")
+                currentClient.accountBalance += amount;
+
+            client_utils::updateClient(currentClient.accountNumber, currentClient.accountBalance);
+
+            cout << "\nDone successfully, New balance is : " << currentClient.accountBalance << "\n";
         }
     }
 
